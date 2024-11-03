@@ -16,10 +16,15 @@ class StringCalculator
       # Extract the delimiter and the rest of the numbers
       delimiter, numbers = numbers[2..].split("\n")
       # Split numbers by the custom delimiter or newline character
-      numbers.split(Regexp.new("[#{delimiter},\n]")).map(&:to_i).sum
+      numbers = numbers.split(Regexp.new("[#{delimiter},\n]"))
     else
       # Split numbers by comma or newline if no custom delimiter is specified
-      numbers.split(/,|\n/).map(&:to_i).sum
+      numbers = numbers.split(/,|\n/)
     end
+
+    negatives = numbers.select { |num| num.to_i.negative? }
+    raise "negative numbers not allowed: #{negatives.join(', ')}" unless negatives.empty?
+
+    numbers.map(&:to_i).sum
   end
 end

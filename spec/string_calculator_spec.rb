@@ -16,8 +16,14 @@ RSpec.describe StringCalculator do
       expect(calculator.add('15')).to eq(15)
     end
 
-    it 'returns the sum of two comma-saperated numbers' do
-      expect(calculator.add('1,2')).to eq(3)
+    context 'with comma-saperated numbers' do
+      it 'returns the correct sum of two numbers' do
+        expect(calculator.add('1,2')).to eq(3)
+      end
+
+      it 'returns the correct sum of nultiple numbers' do
+        expect(calculator.add('1,2,3')).to eq(6)
+      end
     end
   end
 end

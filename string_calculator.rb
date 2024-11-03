@@ -10,21 +10,29 @@ class StringCalculator
   def add(numbers)
     return 0 if numbers.empty?
 
-    numbers.split(/,|\n/).map(&:to_i).sum
+    numbers = split_numbers(numbers)
+    raise_error_if_negative_present(numbers)
+
+    numbers.map(&:to_i).sum
+  end
+
+  private
+
+  def split_numbers(numbers)
     # Check for custom delimiter format "//[delimiter]\n[numbers]"
     if numbers.start_with?("//")
       # Extract the delimiter and the rest of the numbers
       delimiter, numbers = numbers[2..].split("\n")
       # Split numbers by the custom delimiter or newline character
-      numbers = numbers.split(Regexp.new("[#{delimiter},\n]"))
+      numbers.split(Regexp.new("[#{delimiter},\n]"))
     else
       # Split numbers by comma or newline if no custom delimiter is specified
-      numbers = numbers.split(/,|\n/)
+      numbers.split(/,|\n/)
     end
+  end
 
+  def raise_error_if_negative_present(numbers)
     negatives = numbers.select { |num| num.to_i.negative? }
     raise "negative numbers not allowed: #{negatives.join(', ')}" unless negatives.empty?
-
-    numbers.map(&:to_i).sum
   end
 end

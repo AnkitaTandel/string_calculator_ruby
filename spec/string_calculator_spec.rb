@@ -49,5 +49,34 @@ RSpec.describe StringCalculator do
       expect { calculator.add("-3,\n-4") }.to raise_error("negative numbers not allowed: -3, -4")
       expect { calculator.add("//;\n-5;-6") }.to raise_error("negative numbers not allowed: -5, -6")
     end
+
+    # some special cases
+    context 'when consecutive delimiters present in the string' do
+      it 'returns the correct sum' do
+        expect(calculator.add("//;\n1;;;2")).to eq(3)
+        expect(calculator.add("1,,2,3")).to eq(6)
+      end
+    end
+
+    context 'when random spaces present in the string' do
+      it 'returns the correct sum' do
+        expect(calculator.add("//;\n  1 ;2")).to eq(3)
+        expect(calculator.add("1,2,  3")).to eq(6)
+      end
+    end
+
+    context 'when non numeric characetrs present in the string' do
+      it 'returns the correct sum' do
+        expect(calculator.add("//;\n1;a;2;z")).to eq(3)
+        expect(calculator.add("1,d,2,b,3")).to eq(6)
+      end
+    end
+
+    context 'when delimiter present in the end of the string' do
+      it 'returns the correct sum' do
+        expect(calculator.add("//;\n1;2;")).to eq(3)
+        expect(calculator.add("1,2,3,")).to eq(6)
+      end
+    end
   end
 end

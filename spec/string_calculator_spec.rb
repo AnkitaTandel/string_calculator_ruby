@@ -65,7 +65,7 @@ RSpec.describe StringCalculator do
       end
     end
 
-    context 'when non numeric characetrs present in the string' do
+    context 'when non numeric characters present in the string' do
       it 'returns the correct sum' do
         expect(calculator.add("//;\n1;a;2;z")).to eq(3)
         expect(calculator.add("1,d,2,b,3")).to eq(6)

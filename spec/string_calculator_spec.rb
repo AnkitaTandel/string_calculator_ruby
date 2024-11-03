@@ -29,5 +29,19 @@ RSpec.describe StringCalculator do
     it 'returns sum when newlines character is present between numbers' do
       expect(calculator.add("1\n2,3")).to eq(6)
     end
+
+    context 'with custom delimiters specified in the  `//[delimiter]\n[numbers]` format' do
+      context 'when delimiter is `;`' do
+        it 'returns the correct sum by splitting number string using `;`' do
+          expect(calculator.add("//;\n1;2")).to eq(3)
+        end
+      end
+
+      context 'when delimiter is `|`' do
+        it 'returns the correct sum by splitting number string using `|`' do
+          expect(calculator.add("//|\n1|2")).to eq(3)
+        end
+      end
+    end
   end
 end

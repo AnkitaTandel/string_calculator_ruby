@@ -78,5 +78,18 @@ RSpec.describe StringCalculator do
         expect(calculator.add("1,2,3,")).to eq(6)
       end
     end
+
+    # # TODO: validations
+    # context 'when string is Invalid' do
+    #   it 'raises an exception when string has multiple types of delimiters' do
+    #     expect { calculator.add("1,2;3") }.to raise_error("Invalid format")
+    #     expect { calculator.add("1,2;3|4") }.to raise_error("Invalid format")
+    #   end
+    #
+    #   it 'raises an exception when string with custom delimiter has incorrect format' do
+    #     expect { calculator.add("//;\n1,2;3") }.to raise_error("Invalid format")
+    #     expect { calculator.add("//.\n1,2.3.4") }.to raise_error("Invalid format")
+    #   end
+    # end
   end
 end

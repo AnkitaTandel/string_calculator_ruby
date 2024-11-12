@@ -91,5 +91,12 @@ RSpec.describe StringCalculator do
     #     expect { calculator.add("//.\n1,2.3.4") }.to raise_error("Invalid format")
     #   end
     # end
+
+    context 'with custom delimiter as *' do
+      it 'returns the product of the string numbers' do
+        expect(calculator.add("//*\n1*3*3")).to eq(9)
+        expect(calculator.add("//*\n0*3*3")).to eq(0)
+      end
+    end
   end
 end
